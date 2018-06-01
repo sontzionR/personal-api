@@ -9,3 +9,4 @@ class Employment extends Model
     //
     protected $table = 'employment';
 }
+//

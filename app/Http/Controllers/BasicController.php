@@ -33,10 +33,10 @@ class BasicController extends Controller
      * @param  \App\Basic  $basic
      * @return \Illuminate\Http\Response
      */
-    public function show(Basic $basic)
+    public function show()
     {
         //
-        return new BasicResource(Basic::find(1));
+        return BasicResource::collection(Basic::all());
     }
 
 }

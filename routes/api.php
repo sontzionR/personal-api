@@ -12,11 +12,6 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
-Route::get('/user', function (Request $request) {
-    return $request->user();
-});
-
 Route::get('/basic', 'BasicController@show' );
 
 Route::get('/education', 'EducationController@list');
@@ -29,4 +24,6 @@ Route::get('/skills/{id}', 'SkillController@show');
 
 Route::get('/employment','EmploymentController@list');
 
-Route::get('/employment/{id}', 'EmploymentController@show');
+Route::fallback(function(){
+    return response()->json(['message' => 'Not Found!'], 404);
+});

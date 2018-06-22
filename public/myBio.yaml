@@ -1,0 +1,353 @@
+openapi: 3.0.1
+info:
+  title: MY BIO API
+  description: A personal API to get info on myself.
+  version: "1.0.0"
+  contact:
+    name: MYBIO API
+    email: rittermanben@gmail.com
+servers:
+# Added by API Auto Mocking Plugin
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/bentzionr/Bio/1.0.0
+  - url: 'https://api.benritt.com/'
+    description: Production server
+  - url: 'http://api.benritterman.local/project2/Public/'
+    description: Development server
+paths:
+  /basic:
+    get:
+      tags:
+        - Basic info
+      summary: See My Basic Info
+      description: 'Just my name, and photo, and contact info.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                          description: The user ID.
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: First & last name.
+                            phone:
+                              type: string
+                              description: cell phone.
+                            email:
+                              type: string
+                              description: email address.
+        '404':
+          description: Not found response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+  /education:
+    get:
+      tags:
+        - Education
+      summary: See My Education info
+      description: View my places I attended for school including id and name.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                          description: The School ID.
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: School name.
+        '404':
+          description: Not found response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+  '/education/{id}':
+    get:
+      tags:
+        - Education
+      summary: See in depth info for a specific place of education
+      description: >-
+        Using the id of a specific cshool attended and view all info for that
+        place, including date start , date end, degree, subjects studied and 
+        accomplishments.
+      parameters:
+        - name: id
+          in: path
+          description: id of school to be shown
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                          description: The School ID.
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: School name.
+                            address:
+                              type: string
+                              description: School address.
+                            city:
+                              type: string
+                              description: city name.
+                            state:
+                              type: string
+                              description: State.
+                            zip:
+                              type: string
+                              description: zip code
+                            subjects:
+                              type: string
+                              description: Subjects studied.
+                            start:
+                              type: string
+                              description: start date.
+                            end:
+                              type: string
+                              description: end date.
+        '404':
+          description: Not found response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+  /employment:
+    get:
+      tags:
+        - Employment
+      summary: See My Employment info
+      description: View my places of employment id and name.
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                          description: The Employer ID.
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Employer name.
+        '404':
+          description: Not found response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+  '/employment/{id}':
+    get:
+      tags:
+        - Employment
+      summary: See in depth employment info for a specific place of employment
+      description: >-
+        Using the id of a specific work place attended and view all info for
+        that job, including date start , date end, position, accomplishments.
+      parameters:
+        - name: id
+          in: path
+          description: id of employment to be shown
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                          description: The employer ID.
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Employer name.
+                            position:
+                              type: string
+                              description: Job position title.
+                            start:
+                              type: string
+                              description: start date.
+                            end:
+                              type: string
+                              description: end date.
+        '404':
+          description: Not found response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+  /skills:
+    get:
+      tags:
+        - Skills
+      summary: See My Skills
+      description: 'View my skills, id and name.'
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                          description: Skill ID.
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: Skill name.
+        '404':
+          description: Not found response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+  '/skills/{id}':
+    get:
+      tags:
+        - Skills
+      summary: See in depth skill info for a specified skill
+      description: >-
+        Using the id of a specific skill, view all info for that skill,
+        including how many years experience and accomplishments using that
+        specific skill.
+      parameters:
+        - name: id
+          in: path
+          description: id of skill to be shown
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Successful response
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  data:
+                    type: array
+                    items:
+                      type: object
+                      properties:
+                        type:
+                          type: string
+                        id:
+                          type: integer
+                          description: The Skill ID.
+                        attributes:
+                          type: object
+                          properties:
+                            name:
+                              type: string
+                              description: The Skill name.
+                            years:
+                              type: string
+                              description: amount of years experiance in this skill.
+        '404':
+          description: Not found response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/errors'
+components:
+  schemas:
+    errors:
+      type: array
+      items:
+        type: object
+        properties:
+          status:
+            type: string
+          source:
+            type: object
+            properties:
+              pointer:
+                type: string
+          detail:
+            type: string
